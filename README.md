@@ -11,16 +11,6 @@ It doesn't makes any comparison between these alghoritms, its just a visual repr
 ```bash
 $ python3.7 pysort.py [sorting method]
 ```
-Where [sorting method] can be one of the following:
-bogo,
-bubble,
-bucket,
-heap,
-insertion,
-merge,
-radix,
-selection,
-smooth,
-quick.
+Where `[sorting method]` can be one of the following: `bogo`, `bubble`, `bucket`, `heap`, `insertion`, `merge`, `radix`, `selection`, `smooth`, `quick`.
 
 ## Leonardo Zanotti
