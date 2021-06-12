@@ -15,7 +15,6 @@ plt.xticks([i*10 for i in range(11)])
 plt.ylabel('Array value')
 plt.xlabel('Array index')
 
-
 def setHeights():
     for a, b in enumerate(barcollection):
         b.set_height(y[a])
@@ -26,34 +25,49 @@ def bogoSort(i):
     setHeights()
 
 # Bubble Sort
-def bogoSort(i):
+def bubbleSort(i):
     # sorting..
     setHeights()
 
 # Bucket Sort
-def bogoSort(i):
+def bucketSort(i):
     # sorting..
     setHeights()
 
 # Heap Sort
-
+def heapSort(i):
+    # sorting..
+    setHeights()
 
 # Insertion Sort
-
+def insertionSort(i):
+    # sorting..
+    setHeights()
 
 # Merge Sort
-
+def mergeSort(i):
+    # sorting..
+    setHeights()
 
 # Radix Sort
-
+def radixSort(i):
+    # sorting..
+    setHeights()
 
 # Selection Sort
-
+def selectionSort(i):
+    # sorting..
+    setHeights()
 
 # Smooth Sort
-
+def smoothSort(i):
+    # sorting..
+    setHeights()
 
 # Quick Sort
+def quickSort(i):
+    # sorting..
+    setHeights()
 
 def main():
     args = sys.argv
@@ -101,7 +115,7 @@ def main():
         repeat=False,
         blit=False,
         frames=frames,
-        interval=1000
+        interval=100
     )
     plt.show()
 
