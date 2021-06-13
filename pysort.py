@@ -91,36 +91,39 @@ def animate(values, rects):
 
 def main():
     args = sys.argv
+    save = False
     if (len(args) > 1):
+        if (len(args) > 2 and args[2] == 'save'):
+            save = True
         if (args[1] == 'bogo'):
-            plt.title('Bogo sort')
+            title = 'Bogo sort'
             generator = bogoSort
         elif (args[1] == 'bubble'):
-            plt.title('Bubble sort')
+            title = 'Bubble sort'
             generator = bubbleSort
         elif (args[1] == 'bucket'):
-            plt.title('Bucket sort')
+            title = 'Bucket sort'
             generator = bucketSort
         elif (args[1] == 'heap'):
-            plt.title('Heap sort')
+            title = 'Heap sort'
             generator = heapSort
         elif (args[1] == 'insertion'):
-            plt.title('Insertion sort')
+            title = 'Insertion sort'
             generator = insertionSort
         elif (args[1] == 'merge'):
-            plt.title('Merge sort')
+            title = 'Merge sort'
             generator = mergeSort
         elif (args[1] == 'radix'):
-            plt.title('Radix sort')
+            title = 'Radix sort'
             generator = radixSort
         elif (args[1] == 'selection'):
-            plt.title('Selection sort')
+            title = 'Selection sort'
             generator = selectionSort
         elif (args[1] == 'smooth'):
-            plt.title('Smotth sort')
+            title = 'Smotth sort'
             generator = smoothSort
         elif (args[1] == 'quick'):
-            plt.title('Quick sort')
+            title = 'Quick sort'
             generator = quickSort(y, 0, 99)
         else:
             print('(!) -- Error - invalid sorting method - choose one: bogo, bubble, bucket, heap, insertion, merge, radix, selection, smooth, quick')
@@ -138,7 +141,14 @@ def main():
         frames=generator,
         interval=10
     )
-    plt.show()
+    plt.title(title)
+
+    if (save):
+        print('Saving gif...')
+        writergif = animation.PillowWriter(fps=30)
+        anim.save('{}.gif'.format(title), writer=writergif)
+    else:
+        plt.show()
 
 if __name__ == '__main__':
     main()
