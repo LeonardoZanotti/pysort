@@ -2,11 +2,14 @@ import sys
 import matplotlib.pyplot as plt
 from matplotlib import animation
 from numpy.random import randint
+from time import sleep
+import random
 
 fig = plt.figure(figsize=(17, 10), dpi=80)
 
-frames = 1000
 x = range(100)
+# y = list(range(100))
+# random.shuffle(y)
 y = randint(0, 100, 100)
 barcollection = plt.bar(x, y, 0.8)
 
@@ -62,27 +65,21 @@ def smoothSort(i):
     # sorting..
 
 # Quick Sort
-def quickSort(A, start, end):
-    if start >= end:
-        return
-
-    pivot = A[end]
-    tovip = start
-
-    for i in range(start, end):
-        if A[i] < pivot:
-            swap(A, i, tovip)
-            tovip += 1
-        yield A
-    swap(A, end, tovip)
-    yield A
-
-    yield from quickSort(A, start, tovip - 1)
-    yield from quickSort(A, tovip + 1, end)
-
-def swap(A, i, j):
-    if i != j:
-        A[i], A[j] = A[j], A[i]
+def quickSort(arr, low, high):
+    if len(arr) == 1:
+        yield arr
+    if low < high:
+        i = low - 1
+        pivot = arr[high]
+        for j in range(low, high):
+            if arr[j] <= pivot:
+                i = i + 1
+                arr[i], arr[j] = arr[j], arr[i]
+        mid = i + 1
+        arr[mid], arr[high] = arr[high], arr[mid]
+        yield arr
+        yield from quickSort(arr, low, mid - 1)
+        yield from quickSort(arr, mid + 1, high)
 
 operations = 0
 def animate(values, rects):
