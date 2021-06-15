@@ -20,9 +20,12 @@ plt.xlabel('Array index')
 text = plt.text(1, 100, 'Number of operations: 0')
 
 # Bogo Sort
-def bogoSort(i):
-    # sorting..
-    print()
+def bogoSort(arr):
+    # Stupid sort
+    while not all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)):
+        random.shuffle(arr)
+        yield arr
+    yield arr
 
 # Bubble Sort
 def bubbleSort(i):
@@ -97,7 +100,7 @@ def main():
             save = True
         if (args[1] == 'bogo'):
             title = 'Bogo sort'
-            generator = bogoSort
+            generator = bogoSort(y)
         elif (args[1] == 'bubble'):
             title = 'Bubble sort'
             generator = bubbleSort
