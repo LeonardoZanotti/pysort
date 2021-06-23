@@ -22,7 +22,6 @@ text = plt.text(1, 100, 'Number of operations: 0')
 
 # Bogo Sort
 def bogoSort(arr):
-    global y
     # Stupid sort
     # while not all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)):
     #     random.shuffle(arr)
@@ -30,6 +29,7 @@ def bogoSort(arr):
     # yield arr
 
     # Less stupid sort
+    global y
     if (len(arr) > 1):
         for perm in bogoSort(arr[1:]):
             if (len(y) == len(x) and all(y[j] <= y[j + 1] for j in range(len(y) - 1))):
@@ -53,9 +53,33 @@ def bubbleSort(arr):
 
 
 # Bucket Sort
-def bucketSort(i):
-    print()
-    # sorting..
+def bucketSort(arr, buckets):
+    bucketsArr = []
+    standardArr = []
+    standard = int(len(arr)/buckets) + 1
+
+    for i in range(standard):
+        standardArr.append(standard * i)
+
+    for i in range(standard - 1):
+        bucketsArr.append([])
+        for j in range(len(arr)):
+            if (arr[j] >= standardArr[i] and arr[j] < standardArr[i + 1]):
+                bucketsArr[i].append(arr[j])
+    # yield from quickSort(bucketsArr[i], 0, len(bucketsArr[i]) - 1)
+
+    index = 0
+    a = 0
+    for i in range(buckets):
+        a += len(bucketsArr[i])
+        print(a)
+        for j in range(len(bucketsArr[i])):
+            arr[index] = bucketsArr[i][j]    
+            index += 1
+            yield arr
+
+    yield arr
+    
 
 # Heap Sort
 def heapSort(i):
@@ -126,7 +150,7 @@ def main():
             generator = bubbleSort(y)
         elif (args[1] == 'bucket'):
             title = 'Bucket sort'
-            generator = bucketSort
+            generator = bucketSort(y, 10)
         elif (args[1] == 'heap'):
             title = 'Heap sort'
             generator = heapSort
