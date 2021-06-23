@@ -2,6 +2,7 @@ import sys
 import matplotlib.pyplot as plt
 from matplotlib import animation
 from numpy.random import randint
+import numpy as np
 from time import sleep
 import random
 
@@ -21,11 +22,26 @@ text = plt.text(1, 100, 'Number of operations: 0')
 
 # Bogo Sort
 def bogoSort(arr):
+    global y
     # Stupid sort
-    while not all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)):
-        random.shuffle(arr)
-        yield arr
-    yield arr
+    # while not all(arr[i] <= arr[i + 1] for i in range(len(arr) - 1)):
+    #     random.shuffle(arr)
+    #     yield arr
+    # yield arr
+
+    # Less stupid sort
+    if (len(arr) > 1):
+        for perm in bogoSort(arr[1:]):
+            if (len(y) == len(x) and all(y[j] <= y[j + 1] for j in range(len(y) - 1))):
+                break
+            for i in range(len(perm) + 1):
+                y = list(perm[:i]) + [arr[0]] + list(perm[i:])
+                yield y
+                if (len(y) == len(x) and all(y[j] <= y[j + 1] for j in range(len(y) - 1))):
+                    break
+        yield y
+    else:
+        yield list(arr)
 
 # Bubble Sort
 def bubbleSort(i):
