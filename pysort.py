@@ -44,9 +44,13 @@ def bogoSort(arr):
         yield list(arr)
 
 # Bubble Sort
-def bubbleSort(i):
-    print()
-    # sorting..
+def bubbleSort(arr):
+    while not (all(y[j] <= y[j + 1] for j in range(len(y) - 1))):
+        for i in range(len(arr) - 1):
+            if (arr[i] > arr[i + 1]):
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+            yield arr
+
 
 # Bucket Sort
 def bucketSort(i):
@@ -119,7 +123,7 @@ def main():
             generator = bogoSort(y)
         elif (args[1] == 'bubble'):
             title = 'Bubble sort'
-            generator = bubbleSort
+            generator = bubbleSort(y)
         elif (args[1] == 'bucket'):
             title = 'Bucket sort'
             generator = bucketSort
