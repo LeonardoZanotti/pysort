@@ -66,13 +66,12 @@ def bucketSort(arr, buckets):
         for j in range(len(arr)):
             if (arr[j] >= standardArr[i] and arr[j] < standardArr[i + 1]):
                 bucketsArr[i].append(arr[j])
-    # yield from quickSort(bucketsArr[i], 0, len(bucketsArr[i]) - 1)
+        yield from quickSort(bucketsArr[i], 0, len(bucketsArr[i]) - 1)
 
     index = 0
     a = 0
     for i in range(buckets):
         a += len(bucketsArr[i])
-        print(a)
         for j in range(len(bucketsArr[i])):
             arr[index] = bucketsArr[i][j]    
             index += 1
