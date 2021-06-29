@@ -8,7 +8,7 @@ import random
 
 fig = plt.figure(figsize=(17, 10), dpi=80)
 
-numOfElements = 500
+numOfElements = 100
 numOfElementsByTen = numOfElements / 10
 operations = 0
 x = range(numOfElements)
@@ -107,7 +107,7 @@ def selectionSort(arr, arrSorted):
         if (arrCopy[i] < minValue):
             minValue = arr[i]
             minValueIndex = i
-    if (minValue < numOfElements + 1):
+    if ("minValueIndex" in locals()):
         arrSortedCopy.append(minValue)
         arrCopy = np.delete(arrCopy, minValueIndex)
     yield arrSortedCopy
