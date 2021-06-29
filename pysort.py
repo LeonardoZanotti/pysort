@@ -8,17 +8,20 @@ import random
 
 fig = plt.figure(figsize=(17, 10), dpi=80)
 
-x = range(100)
-# y = list(range(100))
+numOfElements = 13
+numOfElementsByTen = numOfElements / 10
+operations = 0
+x = range(numOfElements)
+# y = list(range(numOfElements))
 # random.shuffle(y)
-y = randint(0, 100, 100)
+y = randint(0, numOfElements, numOfElements)
 barcollection = plt.bar(x, y, 0.8)
 
-plt.yticks([i*10 for i in range(11)])
-plt.xticks([i*10 for i in range(11)])
+plt.yticks([i * numOfElementsByTen for i in range(11)])
+plt.xticks([i * numOfElementsByTen for i in range(11)])
 plt.ylabel('Array value')
 plt.xlabel('Array index')
-text = plt.text(1, 100, 'Number of operations: 0')
+text = plt.text(1, numOfElements, 'Number of operations: 0')
 
 # Bogo Sort
 def bogoSort(arr):
@@ -53,25 +56,19 @@ def bubbleSort(arr):
 
 
 # Bucket Sort
+# Doesn't work with numOfElements not divisible by 10
 def bucketSort(arr, buckets):
     bucketsArr = []
-    standardArr = []
-    standard = int(len(arr)/buckets) + 1
 
-    for i in range(standard):
-        standardArr.append(standard * i)
-
-    for i in range(standard - 1):
+    for i in range(buckets):
         bucketsArr.append([])
         for j in range(len(arr)):
-            if (arr[j] >= standardArr[i] and arr[j] < standardArr[i + 1]):
+            if (arr[j] >= 10 * i and arr[j] < 10 * (i + 1)):
                 bucketsArr[i].append(arr[j])
         yield from quickSort(bucketsArr[i], 0, len(bucketsArr[i]) - 1)
 
     index = 0
-    a = 0
     for i in range(buckets):
-        a += len(bucketsArr[i])
         for j in range(len(bucketsArr[i])):
             arr[index] = bucketsArr[i][j]    
             index += 1
@@ -101,9 +98,22 @@ def radixSort(i):
     # sorting..
 
 # Selection Sort
-def selectionSort(i):
-    print()
-    # sorting..
+def selectionSort(arr, arrSorted):
+    global numOfElements
+    arrCopy = arr.copy()
+    arrSortedCopy = arrSorted.copy()
+    minValue = numOfElements + 1
+    for i in range(len(arr)):
+        if (arrCopy[i] < minValue):
+            minValue = arr[i]
+            minValueIndex = i
+    if (minValueIndex):
+        arrSortedCopy.append(minValue)
+        arrCopy = np.delete(arrCopy, minValueIndex)
+    else:
+        print(arrCopy, arrSortedCopy)
+    yield arrSortedCopy
+    yield from selectionSort(arrCopy, arrSortedCopy)
 
 # Smooth Sort
 def smoothSort(i):
@@ -127,7 +137,6 @@ def quickSort(arr, low, high):
         yield from quickSort(arr, low, mid - 1)
         yield from quickSort(arr, mid + 1, high)
 
-operations = 0
 def animate(values, rects):
     global operations
     for rect, value in zip(rects, values):
@@ -149,7 +158,7 @@ def main():
             generator = bubbleSort(y)
         elif (args[1] == 'bucket'):
             title = 'Bucket sort'
-            generator = bucketSort(y, 10)
+            generator = bucketSort(y, int(numOfElementsByTen))
         elif (args[1] == 'heap'):
             title = 'Heap sort'
             generator = heapSort
@@ -164,13 +173,13 @@ def main():
             generator = radixSort
         elif (args[1] == 'selection'):
             title = 'Selection sort'
-            generator = selectionSort
+            generator = selectionSort(y, [])
         elif (args[1] == 'smooth'):
             title = 'Smotth sort'
             generator = smoothSort
         elif (args[1] == 'quick'):
             title = 'Quick sort'
-            generator = quickSort(y, 0, 99)
+            generator = quickSort(y, 0, numOfElements - 1)
         else:
             print('(!) -- Error - invalid sorting method - choose one: bogo, bubble, bucket, heap, insertion, merge, radix, selection, smooth, quick')
             exit(0)
