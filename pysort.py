@@ -79,8 +79,7 @@ def bucketSort(arr, buckets):
 
 # Heap Sort
 def heapSort(arr):
-    print()
-    # sorting..
+    # WTF SHOULD I DO HERE????????
 
 # Insertion Sort
 def insertionSort(i):
