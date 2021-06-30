@@ -79,21 +79,22 @@ def bucketSort(arr, buckets):
 
 # Heap Sort
 def heapSort(arr):
+    print('Not implemented yet')
     # WTF SHOULD I DO HERE????????
 
 # Insertion Sort
 def insertionSort(i):
-    print()
+    print('Not implemented yet')
     # sorting..
 
 # Merge Sort
 def mergeSort(i):
-    print()
+    print('Not implemented yet')
     # sorting..
 
 # Radix Sort
 def radixSort(i):
-    print()
+    print('Not implemented yet')
     # sorting..
 
 # Selection Sort
@@ -114,7 +115,7 @@ def selectionSort(arr, arrSorted):
 
 # Smooth Sort
 def smoothSort(i):
-    print()
+    print('Not implemented yet')
     # sorting..
 
 # Quick Sort
