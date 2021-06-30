@@ -78,7 +78,7 @@ def bucketSort(arr, buckets):
     
 
 # Heap Sort
-def heapSort(i):
+def heapSort(arr):
     print()
     # sorting..
 
@@ -159,7 +159,7 @@ def main():
             generator = bucketSort(y, int(numOfElementsByTen))
         elif (args[1] == 'heap'):
             title = 'Heap sort'
-            generator = heapSort
+            generator = heapSort(y)
         elif (args[1] == 'insertion'):
             title = 'Insertion sort'
             generator = insertionSort
