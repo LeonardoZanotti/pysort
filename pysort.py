@@ -1,4 +1,5 @@
 import sys
+import os
 import matplotlib.pyplot as plt
 from matplotlib import animation
 from numpy.random import randint
@@ -199,7 +200,9 @@ def main():
     if (save):
         print('Saving gif...')
         writergif = animation.PillowWriter(fps=30)
-        anim.save('{}.gif'.format(title), writer=writergif)
+        if (not os.path.isdir('./gifs')):
+            os.makedirs('./gifs')
+        anim.save('./gifs/{}.gif'.format(title), writer=writergif)
     else:
         plt.show()
 
