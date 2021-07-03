@@ -87,7 +87,7 @@ def heapSort(arr):
         arrayIndexes.append(i)
         if (arr[i] >= maxValue):
             maxValue, maxValueIndex = arr[i], i
-    
+
     if (not "maxValueIndex" in locals()):
         return
 
