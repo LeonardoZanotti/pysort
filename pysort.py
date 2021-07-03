@@ -6,6 +6,7 @@ from numpy.random import randint
 import numpy as np
 from time import sleep
 import random
+from math import ceil
 
 fig = plt.figure(figsize=(17, 10), dpi=80)
 
@@ -80,8 +81,26 @@ def bucketSort(arr, buckets):
 
 # Heap Sort
 def heapSort(arr):
-    print('Not implemented yet')
-    # WTF SHOULD I DO HERE????????
+    maxValue = -1
+    arrayIndexes = []
+    for i in range(len(arr)):
+        arrayIndexes.append(i)
+        if (arr[i] >= maxValue):
+            maxValue, maxValueIndex = arr[i], i
+    
+    if (not "maxValueIndex" in locals()):
+        return
+
+    arr[len(arr) - 1], arr[maxValueIndex] = arr[maxValueIndex], arr[len(arr) - 1]
+    yield arr
+
+    for i in range(len(arr) - 1, -1, -1):
+        if ((ceil(i / 2) - 1) in arrayIndexes and arr[(ceil(i / 2) - 1)] > arr[i]):
+            arr[(ceil(i / 2) - 1)], arr[i] = arr[i], arr[(ceil(i / 2) - 1)]
+        yield arr
+
+    yield from heapSort(arr[:len(arr) - 1])
+   
 
 # Insertion Sort
 def insertionSort(i):
