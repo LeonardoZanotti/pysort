@@ -10,7 +10,7 @@ from math import ceil
 
 fig = plt.figure(figsize=(17, 10), dpi=80)
 
-numOfElements = 10
+numOfElements = 100
 numOfElementsByTen = numOfElements / 10
 operations = 0
 x = range(numOfElements)
@@ -110,9 +110,8 @@ def insertionSort(i):
 # Merge Sort
 def mergeSort(arr):
     arrOfArrs = []
-    arrOfArrsIndexes = []
+
     for i in range(len(arr)):
-        arrOfArrsIndexes.append(i)
         arrOfArrs.append([arr[i]])
 
     yield arr
@@ -122,56 +121,54 @@ def mergeSort(arr):
 
         for i in range(len(arrOfArrs) - 1):
             if (i % 2 == 0):
-                sortedArr = arrOfArrs[i] + arrOfArrs[i + 1]
+                sortedArr = []
+                indexesArrayI = []
+                indexesArrayI1 = []
 
-                for j in range(len(sortedArr)):
-                    index = 0
-                    kindex = 0
-                    indexesArrayI = []
-                    indexesArrayI1 = []
+                for j in range(len(arrOfArrs[i] + arrOfArrs[i + 1])):
+                    sortedArr.append(numOfElements + 1)
 
                     for k in range(len(arrOfArrs[i])):
                         if (sortedArr[j] > arrOfArrs[i][k] and k not in indexesArrayI):
                             sortedArr[j] = arrOfArrs[i][k]
                             index = i
                             kindex = k
-                            indexesArrayI.append(k)
         
                     for k in range(len(arrOfArrs[i + 1])):
                         if (sortedArr[j] > arrOfArrs[i + 1][k] and k not in indexesArrayI1):
                             sortedArr[j] = arrOfArrs[i + 1][k]
                             index = i + 1
                             kindex = k
-                            indexesArrayI1.append(k)
-                
+
+                    indexesArrayI.append(kindex) if (index == i) else indexesArrayI1.append(kindex)
+
                 arrOfArrsCopy.append(sortedArr)
             
             if ((i == len(arrOfArrs) - 2) and (i % 2 == 1)):
-                sortedArr = arrOfArrsCopy[len(arrOfArrsCopy) - 1] + arrOfArrs[i + 1]
+                sortedArr = []
+                indexesArrayI = []
+                indexesArrayI1 = []
 
-                for j in range(len(sortedArr)):
-                    index = 0
-                    kindex = 0
-                    indexesArrayI = []
-                    indexesArrayI1 = []
+                for j in range(len(arrOfArrsCopy[len(arrOfArrsCopy) - 1] + arrOfArrs[i + 1])):
+                    sortedArr.append(numOfElements + 1)
 
                     for k in range(len(arrOfArrsCopy[len(arrOfArrsCopy) - 1])):
                         if (sortedArr[j] > arrOfArrsCopy[len(arrOfArrsCopy) - 1][k] and k not in indexesArrayI):
                             sortedArr[j] = arrOfArrsCopy[len(arrOfArrsCopy) - 1][k]
                             index = i
                             kindex = k
-                            indexesArrayI.append(k)
                 
                     for k in range(len(arrOfArrs[i + 1])):
                         if (sortedArr[j] > arrOfArrs[i + 1][k] and k not in indexesArrayI1):
                             sortedArr[j] = arrOfArrs[i + 1][k]
                             index = i + 1
                             kindex = k
-                            indexesArrayI1.append(k)
+
+                    indexesArrayI.append(kindex) if (index == i) else indexesArrayI1.append(kindex)
                 
                 arrOfArrsCopy[len(arrOfArrsCopy) - 1] = sortedArr
-            
-            yield [item for item in arr for arr in arrOfArrsCopy]
+
+            yield [item for sublist in arrOfArrsCopy for item in sublist]
 
         arrOfArrs = arrOfArrsCopy
 
