@@ -100,12 +100,22 @@ def heapSort(arr):
         yield arr
 
     yield from heapSort(arr[:len(arr) - 1])
-   
 
 # Insertion Sort
-def insertionSort(i):
-    print('Not implemented yet')
-    # sorting..
+def insertionSort(arrSorted, arr, index):
+    if (index < numOfElements):
+        arrSorted.append(arr[index])
+        if (index != 0):
+            indexCopy = index
+            for i in range(len(arrSorted) - 2, -1, -1):
+                if (arrSorted[indexCopy] < arrSorted[i]):
+                    arrSorted[indexCopy], arrSorted[i] = arrSorted[i], arrSorted[indexCopy]
+                    indexCopy -= 1
+                    yield arrSorted
+                else:
+                    break
+
+        yield from insertionSort(arrSorted, arr, index + 1)
 
 # Merge Sort
 def mergeSort(arr):
@@ -242,7 +252,7 @@ def main():
             generator = heapSort(y)
         elif (args[1] == 'insertion'):
             title = 'Insertion sort'
-            generator = insertionSort
+            generator = insertionSort([], y, 0)
         elif (args[1] == 'merge'):
             title = 'Merge sort'
             generator = mergeSort(y)
