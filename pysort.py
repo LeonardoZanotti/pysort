@@ -283,7 +283,7 @@ def main():
         blit=False,
         frames=generator,
         interval=10,
-        save_count=500
+        save_count=300
     )
     plt.title(title)
 
