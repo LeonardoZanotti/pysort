@@ -183,9 +183,15 @@ def mergeSort(arr):
         arrOfArrs = arrOfArrsCopy
 
 # Radix Sort
-def radixSort(i):
-    print('Not implemented yet')
-    # sorting..
+def radixSort(arr, maxValue, index):
+    # arrCopy = np.zeros((10,), dtype = int)
+    for i in range(len(arr)):
+        arrChar = int((str(arr[i]).zfill(maxValue))[index])
+        print(arr[i], arrChar)
+        # arrCopy[arrChar] += 1
+    # for j in range(1, len(arrCopy)):
+        # arrCopy[j] = arrCopy[j] + arrCopy[j - 1]
+    yield from radixSort(arr, maxValue, index + 1)
 
 # Selection Sort
 def selectionSort(arr, arrSorted):
@@ -258,7 +264,7 @@ def main():
             generator = mergeSort(y)
         elif (args[1] == 'radix'):
             title = 'Radix sort'
-            generator = radixSort
+            generator = radixSort([5, 15, 78, 103, 249, 23, 900], 3, 0)
         elif (args[1] == 'selection'):
             title = 'Selection sort'
             generator = selectionSort(y, [])
