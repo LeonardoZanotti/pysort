@@ -282,7 +282,8 @@ def main():
         fargs=(barcollection, ),
         blit=False,
         frames=generator,
-        interval=10
+        interval=10,
+        save_count=5000
     )
     plt.title(title)
 
