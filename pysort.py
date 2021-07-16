@@ -184,14 +184,26 @@ def mergeSort(arr):
 
 # Radix Sort
 def radixSort(arr, maxValue, index):
-    # arrCopy = np.zeros((10,), dtype = int)
-    for i in range(len(arr)):
-        arrChar = int((str(arr[i]).zfill(maxValue))[index])
-        print(arr[i], arrChar)
-        # arrCopy[arrChar] += 1
-    # for j in range(1, len(arrCopy)):
-        # arrCopy[j] = arrCopy[j] + arrCopy[j - 1]
-    yield from radixSort(arr, maxValue, index + 1)
+    if (index <= maxValue):
+        arrDecimals = np.zeros((10,), dtype = int)
+        arrChar = arr.copy()
+        newArr = arr.copy()
+
+        ## couting sort starts
+        for i in range(len(arr)):
+            arrChar[i] = int((str(arr[i]).zfill(maxValue))[maxValue - index])
+            arrDecimals[arrChar[i]] += 1
+
+        for j in range(1, len(arrDecimals)):
+            arrDecimals[j] = arrDecimals[j] + arrDecimals[j - 1]
+        
+        for k in range(len(arr) - 1, -1, -1):
+            newArr[arrDecimals[arrChar[k]] - 1] = arr[k]
+            arrDecimals[arrChar[k]] -= 1
+            yield newArr
+        ## couting sort ends
+
+        yield from radixSort(newArr, maxValue, index + 1)
 
 # Selection Sort
 def selectionSort(arr, arrSorted):
@@ -264,7 +276,7 @@ def main():
             generator = mergeSort(y)
         elif (args[1] == 'radix'):
             title = 'Radix sort'
-            generator = radixSort([5, 15, 78, 103, 249, 23, 900], 3, 0)
+            generator = radixSort(y, len(str(max(y))), 1)
         elif (args[1] == 'selection'):
             title = 'Selection sort'
             generator = selectionSort(y, [])
