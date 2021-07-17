@@ -221,11 +221,6 @@ def selectionSort(arr, arrSorted):
     yield arrSortedCopy
     yield from selectionSort(arrCopy, arrSortedCopy)
 
-# Smooth Sort
-def smoothSort(i):
-    print('Not implemented yet')
-    # sorting..
-
 # Quick Sort
 def quickSort(arr, low, high):
     if len(arr) == 1:
@@ -280,17 +275,14 @@ def main():
         elif (args[1] == 'selection'):
             title = 'Selection sort'
             generator = selectionSort(y, [])
-        elif (args[1] == 'smooth'):
-            title = 'Smotth sort'
-            generator = smoothSort
         elif (args[1] == 'quick'):
             title = 'Quick sort'
             generator = quickSort(y, 0, numOfElements - 1)
         else:
-            print('(!) -- Error - invalid sorting method - choose one: bogo, bubble, bucket, heap, insertion, merge, radix, selection, smooth, quick')
+            print('(!) -- Error - invalid sorting method - choose one: bogo, bubble, bucket, heap, insertion, merge, radix, selection, quick')
             exit(0)
     else:
-        print('(!) -- Error - invalid sorting method - choose one: bogo, bubble, bucket, heap, insertion, merge, radix, selection, smooth, quick')
+        print('(!) -- Error - invalid sorting method - choose one: bogo, bubble, bucket, heap, insertion, merge, radix, selection, quick')
         exit(0)
 
     anim = animation.FuncAnimation(
